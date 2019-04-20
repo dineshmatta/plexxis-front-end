@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { FaUserPlus, FaUserEdit } from 'react-icons/fa';
 import AddEditForm from "../Forms/FormAddEdit";
 
 class ModalForm extends Component {
@@ -11,7 +12,7 @@ class ModalForm extends Component {
   toggle = () => {
     this.setState(prevState => ({
       show: !prevState.show
-    }))
+    }));
   }
 
   renderButton(label){
@@ -19,14 +20,14 @@ class ModalForm extends Component {
     if (label === 'Edit') {
       button =  (
         <Button className="btn-edit" variant="warning" onClick={this.toggle}>
-          {label}
+          <FaUserEdit />
         </Button>
       )
       titile = 'Edit Employee';
     } else {
       button = (
         <Button className="btn-add" variant="primary" onClick={this.toggle}>
-          {label}
+          <FaUserPlus />
         </Button>
       )
       titile = 'Add Employee';

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ModalForm from '../Modals'
 import api from "../../services/api";
 import ReactTable from "react-table";
+import { FaUserMinus } from 'react-icons/fa';
+
 import { Row, Col, Button } from "react-bootstrap";
 
 class ReactDataTable extends Component {
@@ -52,7 +54,7 @@ class ReactDataTable extends Component {
                 Cell: row => (
                   <div className="actions">
                       <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.props.updateEmployee}/>
-                      <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}>Delete</Button>
+                      <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}><FaUserMinus /></Button>
                   </div>
                 )
               }

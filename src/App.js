@@ -1,7 +1,6 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css'
+import { Container, Row, Col } from 'react-bootstrap';
+import ReactDataTable from './Components/Tables/ReactDataTable';
 
 class App extends React.Component {
   state = {
@@ -47,49 +46,19 @@ class App extends React.Component {
       employees
     } = this.state;
 
-    const columns = [{
-      Header: 'Name',
-      accessor: 'name' // String-based value accessors!
-    }, {
-      Header: 'Code',
-      accessor: 'code'
-    }, {
-      Header: 'Profession',
-      accessor: 'profession'
-    }, {
-      Header: 'Color',
-      accessor: 'color'
-    },{
-      Header: 'City',
-      accessor: 'city'
-    },{
-      Header: 'Branch',
-      accessor: 'branch'
-    },
-    {
-      Header: 'Assigned',
-      accessor: 'assigned'
-    }]
-    
     return (
       <React.Fragment>
         <Container>
           <Row>
             <Col>
-              <h1 style={{margin: "20px 0"}}>CRUD Database</h1>
+              <h1 style={{margin: "20px 0"}}>Employee Records</h1>
             </Col>
           </Row>
-          <ReactTable
-            data={employees}
-            columns={columns}
-            defaultPageSize={5}
-            className="-striped -highlight"
-          />
+          <ReactDataTable data={employees}></ReactDataTable>
         </Container>
       </React.Fragment>
       
     );
-
 
   }
 }

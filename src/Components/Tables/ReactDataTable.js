@@ -15,70 +15,62 @@ class ReactDataTable extends Component {
         console.log(res.data.id)
         this.props.deleteEmployee(res.data.id);
       } catch (e) {
-        console.log(`Axios request failed: ${e}`);
+        console.log(`Failed to delete employee: ${e}`);
       }
     }
   }
 
+  capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   getColumns() {
-    return [
-      {
-        Header: "Name",
-        accessor: "name" // String-based value accessors!
-      },
-      {
-        Header: "Code",
-        accessor: "code"
-      },
-      {
-        Header: "Profession",
-        accessor: "profession"
-      },
-      {
-        Header: "Color",
-        accessor: "color"
-      },
-      {
-        Header: "City",
-        accessor: "city"
-      },
-      {
-        Header: "Branch",
-        accessor: "branch"
-      },
-      {
-        Header: "Assigned",
-        accessor: "assigned",
-        Cell: props => (
-                <input 
-                  type="checkbox" 
-                  id="assigned" 
-                  name="assigned" 
-                  checked={props.value} 
-                  disabled/>
-              )
-      },
-      {
-        Header: 'Actions',
-        Cell: row => (
-            <div className="actions">
-                <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.props.updateEmployee}/>
-                <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}>Delete</Button>
-            </div>
-        )
-     }
-    ];
+    if (this.props.data.length) {
+      const cols =  Object.keys(this.props.data[0])
+        .filter(key => key !== 'id')
+        .map(key => {
+          let obj = {
+            Header: this.capitalizeFirstLetter(key),
+            accessor: key
+          }
+          if (key === 'assigned') {
+            obj = {...obj, Cell: props => (
+              <input 
+                type="checkbox" 
+                id="assigned" 
+                name="assigned" 
+                checked={props.value} 
+                disabled/>
+            )}
+          }
+          return obj;
+      });
+      return [
+              ...cols, 
+              {   
+                Header: 'Actions',
+                Cell: row => (
+                  <div className="actions">
+                      <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.props.updateEmployee}/>
+                      <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}>Delete</Button>
+                  </div>
+                )
+              }
+            ];
+    }
+    return [];
   }
 
   render() {
     const data = this.props.data;
+    const columns = this.getColumns();
     return (
       <React.Fragment>
         <Row>
           <Col>
             <ReactTable
               data={data}
-              columns={this.getColumns()}
+              columns={columns}
               defaultPageSize={5}
               className="-striped -highlight"
             />

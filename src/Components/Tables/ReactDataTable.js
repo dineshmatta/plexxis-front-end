@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css'
+import React, { Component } from "react";
+import ReactTable from "react-table";
+import { Row, Col } from "react-bootstrap";
 
 class ReactDataTable extends Component {
-  getColumns(){
+  getColumns() {
     return [
       {
         Header: "Name",
@@ -40,12 +40,16 @@ class ReactDataTable extends Component {
     const data = this.props.data;
     return (
       <React.Fragment>
-        <ReactTable
-          data={data}
-          columns={this.getColumns()}
-          defaultPageSize={5}
-          className="-striped -highlight"
-        />
+        <Row>
+          <Col>
+            <ReactTable
+              data={data}
+              columns={this.getColumns()}
+              defaultPageSize={5}
+              className="-striped -highlight"
+            />
+          </Col>
+        </Row>
       </React.Fragment>
     );
   }

@@ -9,7 +9,7 @@ class AddEditForm extends React.Component {
     color: "",
     city: "",
     branch: "",
-    assigned: true
+    assigned: false
   };
 
   onChange = e => {
@@ -18,6 +18,29 @@ class AddEditForm extends React.Component {
           ? e.target.checked 
           : e.target.value
     this.setState({[e.target.name]: value});
+  }
+
+  componentDidMount() {
+    if(this.props.data){
+      const {
+            name, 
+            code, 
+            profession, 
+            color, 
+            city, 
+            branch, 
+            assigned
+      } = this.props.data;
+      this.setState({
+          name, 
+          code, 
+          profession, 
+          color, 
+          city, 
+          branch, 
+          assigned
+      });
+    }
   }
 
   render() {
@@ -30,8 +53,9 @@ class AddEditForm extends React.Component {
           branch, 
           assigned
     } = this.state;
+
     return (
-      <Form onSubmit={this.props.item ? this.submitFormEdit : this.submitFormAdd}>
+      <Form onSubmit={this.props.data ? this.submitFormEdit : this.submitFormAdd}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control 
@@ -101,7 +125,7 @@ class AddEditForm extends React.Component {
                 onChange={this.onChange}  
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className="btn-submit" variant="primary" type="submit">
           Submit
         </Button>
       </Form>

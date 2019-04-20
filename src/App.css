@@ -1,9 +1,19 @@
 h1 {
   font-size: 24px;
-  padding: 20px;
   margin: 0;
 }
 
-.add-btn {
+.btn-add {
   margin: 20px 0px;
+}
+
+.actions {
+  display: flex;
+  width: 100px;
+  margin: 0 -5px;
+}
+
+.btn-edit, .btn-delete {
+  width: 62px;
+  margin: 0 5px;  
 }

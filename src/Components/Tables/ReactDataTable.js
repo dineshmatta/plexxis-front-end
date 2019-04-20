@@ -1,8 +1,18 @@
 import React, { Component } from "react";
+import ModalForm from '../Modals/Modal'
 import ReactTable from "react-table";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 class ReactDataTable extends Component {
+
+  handleEdit(originalRow) {
+    console.log('edit', originalRow)
+  }
+
+  handleDelete(originalRow) {
+    console.log('delete', originalRow)
+  }
+
   getColumns() {
     return [
       {
@@ -31,8 +41,25 @@ class ReactDataTable extends Component {
       },
       {
         Header: "Assigned",
-        accessor: "assigned"
-      }
+        accessor: "assigned",
+        Cell: props => (
+                <input 
+                  type="checkbox" 
+                  id="assigned" 
+                  name="assigned" 
+                  checked={props.value} 
+                  disabled/>
+              )
+      },
+      {
+        Header: 'Actions',
+        Cell: row => (
+            <div className="actions">
+                <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.handleEdit}/>
+                <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}>Delete</Button>
+            </div>
+        )
+     }
     ];
   }
 

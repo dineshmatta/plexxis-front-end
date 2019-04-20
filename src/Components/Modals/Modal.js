@@ -14,28 +14,41 @@ class ModalForm extends Component {
     }))
   }
 
-  render() {
-    const label = this.props.buttonLabel;
-    return (
-      <React.Fragment>
-        <Button variant="primary" onClick={this.toggle}>
+  renderButton(label){
+    let button = '', titile = '';
+    if (label === 'Edit') {
+      button =  (
+        <Button className="btn-edit" variant="warning" onClick={this.toggle}>
           {label}
         </Button>
+      )
+      titile = 'Edit Employee';
+    } else {
+      button = (
+        <Button className="btn-add" variant="primary" onClick={this.toggle}>
+          {label}
+        </Button>
+      )
+      titile = 'Add Employee';
+    }
+    return { button, titile };
+  }
+
+  render() {
+    const { button, titile } = this.renderButton(this.props.buttonLabel);
+    return (
+      <React.Fragment>
+        {button}
         <Modal show={this.state.show} onHide={this.toggle}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>{titile}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <AddEditForm></AddEditForm>
+            <AddEditForm 
+              data={this.props.data}
+              addEmployee={this.props.addEmployee}>
+            </AddEditForm>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.toggle}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.toggle}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
         </Modal>
       </React.Fragment>
     )

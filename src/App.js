@@ -16,6 +16,12 @@ class App extends React.Component {
       .then(employees => this.setState({ employees }));
   };
 
+  addEmployeeToState = (employee) => {
+    this.setState(prevState => ({
+      employees: [...prevState.employees, employee]
+    }));
+  };
+
   render1() {
     const { employees } = this.state;
 
@@ -47,7 +53,7 @@ class App extends React.Component {
           <ReactDataTable data={employees} />
           <Row>
             <Col>
-            <ModalForm buttonLabel="Add Employee"/>
+              <ModalForm buttonLabel="Add" addEmployee={this.addEmployeeToState}/>
             </Col>
           </Row>
         </Container>

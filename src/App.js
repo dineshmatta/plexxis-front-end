@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ReactDataTable from "./Components/Tables/ReactDataTable";
-import Header from "./Components/Header/Header";
-import ModalForm from "./Components/Modals/Modal"
-import './App.css'
+import Header from "./Components/Header";
+import ModalForm from "./Components/Modals";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -16,31 +16,23 @@ class App extends React.Component {
       .then(employees => this.setState({ employees }));
   };
 
-  addEmployeeToState = (employee) => {
+  addEmployeeToState = employee => {
     this.setState(prevState => ({
       employees: [...prevState.employees, employee]
     }));
   };
 
-  render1() {
-    const { employees } = this.state;
-
-    console.log(this.state);
-
-    return (
-      <div className="App">
-        <h1>Plexxis Employees</h1>
-        {employees.map(employee => (
-          <div key={employee.id}>
-            {Object.keys(employee).map(key => (
-              <span key={key}>
-                {key}:{employee[key]}
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-    );
+  updateEmployee = (item) => {
+    this.setState(prevState => ({
+      employees: prevState.employees.map(
+        employee => (employee.id !== item.id) ? employee : {...employee, ...item}
+      )
+    }))
+  }
+  
+  deleteEmployee = (id) => {
+    const updatedEmployees = this.state.employees.filter(item => item.id !== id)
+    this.setState({ employees: updatedEmployees })
   }
 
   render() {
@@ -50,10 +42,16 @@ class App extends React.Component {
       <React.Fragment>
         <Container>
           <Header />
-          <ReactDataTable data={employees} />
+          <ReactDataTable 
+            data={employees} 
+            updateEmployee={this.updateEmployee}
+            deleteEmployee={this.deleteEmployee} />
           <Row>
             <Col>
-              <ModalForm buttonLabel="Add" addEmployee={this.addEmployeeToState}/>
+              <ModalForm
+                buttonLabel="Add"
+                addEmployee={this.addEmployeeToState}
+              />
             </Col>
           </Row>
         </Container>

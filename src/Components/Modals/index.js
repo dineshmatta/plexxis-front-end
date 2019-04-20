@@ -46,7 +46,9 @@ class ModalForm extends Component {
           <Modal.Body>
             <AddEditForm 
               data={this.props.data}
-              addEmployee={this.props.addEmployee}>
+              toggle={this.toggle}
+              addEmployee={this.props.addEmployee}
+              updateEmployee={this.props.updateEmployee}>
             </AddEditForm>
           </Modal.Body>
         </Modal>

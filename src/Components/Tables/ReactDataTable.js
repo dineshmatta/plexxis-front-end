@@ -1,16 +1,23 @@
 import React, { Component } from "react";
-import ModalForm from '../Modals/Modal'
+import ModalForm from '../Modals'
+import api from "../../services/api";
 import ReactTable from "react-table";
 import { Row, Col, Button } from "react-bootstrap";
 
 class ReactDataTable extends Component {
 
-  handleEdit(originalRow) {
-    console.log('edit', originalRow)
-  }
-
-  handleDelete(originalRow) {
-    console.log('delete', originalRow)
+  handleDelete = async (originalRow) => {
+    const confirmDelete = window.confirm('Are you sure?');
+    const { id } = originalRow;
+    if(confirmDelete){
+      try {
+        const res = await api.delete(`/api/employees/${id}`);
+        console.log(res.data.id)
+        this.props.deleteEmployee(res.data.id);
+      } catch (e) {
+        console.log(`Axios request failed: ${e}`);
+      }
+    }
   }
 
   getColumns() {
@@ -55,7 +62,7 @@ class ReactDataTable extends Component {
         Header: 'Actions',
         Cell: row => (
             <div className="actions">
-                <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.handleEdit}/>
+                <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.props.updateEmployee}/>
                 <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}>Delete</Button>
             </div>
         )

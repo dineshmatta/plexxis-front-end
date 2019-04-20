@@ -4,7 +4,7 @@ const app = express()
 const employees = require('./data/employees.json');
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3002',
   optionsSuccessStatus: 200
 }
 

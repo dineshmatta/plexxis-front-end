@@ -1,0 +1,16 @@
+CREATE TABLE users (
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR(30),
+  code VARCHAR(30),
+  profession VARCHAR(30),
+  color VARCHAR(30),
+  city VARCHAR(30),
+  branch VARCHAR(30),
+  assigned Boolean
+);
+
+INSERT INTO users (name, code, profession, color, city, branch, assigned)
+  VALUES ('Kyle Lowry', 'F100', 'Drywall Installer', '#FF6600', 'Brampton', 'Abacus', true);
+
+INSERT INTO users (name, code, profession, color, city, branch, assigned)
+  VALUES ('DeMar DeRozan', 'F101', 'Drywall Installer', 'yellow', 'Brampton', 'Pillsworth', false);

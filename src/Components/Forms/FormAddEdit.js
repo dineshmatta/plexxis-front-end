@@ -37,6 +37,7 @@ class AddEditForm extends React.Component {
       console.log('Returned data:', res);
     } catch (e) {
       console.log(`Axios request failed: ${e}`);
+      //TODO: Add Error boundry component
     }
   }
 
@@ -50,6 +51,7 @@ class AddEditForm extends React.Component {
       console.log('Returned data:', res);
     } catch (e) {
       console.log(`Axios request failed: ${e}`);
+      //TODO: Add Error boundry component
     }
   }
 
@@ -66,8 +68,7 @@ class AddEditForm extends React.Component {
 
     return (
       <Form
-        onSubmit={this.props.data ? this.submitFormEdit : this.submitFormAdd}
-      >
+        onSubmit={this.props.data ? this.submitFormEdit : this.submitFormAdd}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control

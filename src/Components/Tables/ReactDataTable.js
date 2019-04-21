@@ -3,7 +3,6 @@ import ModalForm from '../Modals'
 import api from "../../services/api";
 import ReactTable from "react-table";
 import { FaTrashAlt } from 'react-icons/fa';
-
 import { Row, Col } from "react-bootstrap";
 
 class ReactDataTable extends Component {
@@ -68,22 +67,19 @@ class ReactDataTable extends Component {
   render() {
     const data = this.props.data;
     const columns = this.getColumns();
-    console.log('pp', data.length);
     return (
-      <React.Fragment>
-        <Row>
-          <Col>
-            <ReactTable
-              key={data.length}
-              noDataText="No Employee Records Present"
-              data={data}
-              columns={columns}
-              defaultPageSize={data.length}
-              className="-striped -highlight"
-            />
-          </Col>
-        </Row>
-      </React.Fragment>
+      <Row>
+        <Col>
+          <ReactTable
+            key={data.length}
+            noDataText="No Employee Records Present"
+            data={data}
+            columns={columns}
+            defaultPageSize={data.length}
+            className="-striped -highlight"
+          />
+        </Col>
+      </Row>
     );
   }
 }

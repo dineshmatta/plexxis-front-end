@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import ReactDataTable from "./Components/Tables/ReactDataTable";
 import Header from "./Components/Header";
 import ModalForm from "./Components/Modals";
@@ -38,22 +38,26 @@ class App extends React.Component {
   render() {
     const { employees } = this.state;
 
+    if (!employees.length) {
+      return (<span>Loading...</span>);
+    }
+
     return (
       <React.Fragment>
         <Container>
           <Header />
+          <Row>
+            <Col>
+              <ModalForm
+                  buttonLabel="Add"
+                  addEmployee={this.addEmployeeToState}
+                />
+            </Col>
+          </Row>
           <ReactDataTable 
             data={employees} 
             updateEmployee={this.updateEmployee}
             deleteEmployee={this.deleteEmployee} />
-          <Row>
-            <Col>
-              <ModalForm
-                buttonLabel="Add"
-                addEmployee={this.addEmployeeToState}
-              />
-            </Col>
-          </Row>
         </Container>
       </React.Fragment>
     );

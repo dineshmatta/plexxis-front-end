@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { FaUserPlus, FaUserEdit } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 import AddEditForm from "../Forms/FormAddEdit";
 
 class ModalForm extends Component {
@@ -19,15 +19,15 @@ class ModalForm extends Component {
     let button = '', titile = '';
     if (label === 'Edit') {
       button =  (
-        <Button className="btn-edit" variant="warning" onClick={this.toggle}>
-          <FaUserEdit />
-        </Button>
+        // <Button className="btn-edit" variant="warning" onClick={this.toggle}>
+          <FaEdit className="btn-edit" onClick={this.toggle}/>
+        // </Button>
       )
       titile = 'Edit Employee';
     } else {
       button = (
         <Button className="btn-add" variant="primary" onClick={this.toggle}>
-          <FaUserPlus />
+          Add Employee
         </Button>
       )
       titile = 'Add Employee';

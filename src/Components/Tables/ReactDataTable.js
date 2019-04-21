@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import ModalForm from '../Modals'
 import api from "../../services/api";
 import ReactTable from "react-table";
-import { FaUserMinus } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 class ReactDataTable extends Component {
 
@@ -36,7 +36,7 @@ class ReactDataTable extends Component {
             accessor: key
           }
           if (key === 'assigned') {
-            obj = {...obj, Cell: props => (
+            obj = {...obj, width: 80, className: "center", Cell: props => (
               <input 
                 type="checkbox" 
                 id="assigned" 
@@ -54,7 +54,9 @@ class ReactDataTable extends Component {
                 Cell: row => (
                   <div className="actions">
                       <ModalForm buttonLabel="Edit" data={row.original} updateEmployee={this.props.updateEmployee}/>
-                      <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}><FaUserMinus /></Button>
+                      { '|' } 
+                      <FaTrashAlt className="btn-delete" onClick={() => this.handleDelete(row.original)} />
+                      {/* <Button className="btn-delete" variant="danger" onClick={() => this.handleDelete(row.original)}><FaTrash /></Button> */}
                   </div>
                 )
               }
@@ -66,14 +68,17 @@ class ReactDataTable extends Component {
   render() {
     const data = this.props.data;
     const columns = this.getColumns();
+    console.log('pp', data.length);
     return (
       <React.Fragment>
         <Row>
           <Col>
             <ReactTable
+              key={data.length}
+              noDataText="No Employee Records Present"
               data={data}
               columns={columns}
-              defaultPageSize={5}
+              defaultPageSize={data.length}
               className="-striped -highlight"
             />
           </Col>

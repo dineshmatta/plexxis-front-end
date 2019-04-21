@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <Row>
       <Col>
-        <h1 style={{ margin: "20px 0" }}>Employee Records</h1>
+        <h1>Employee Records</h1>
       </Col>
     </Row>
   );

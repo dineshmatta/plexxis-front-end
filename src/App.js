@@ -3,6 +3,7 @@ import { Container, Row, Col} from "react-bootstrap";
 import ReactDataTable from "./Components/Tables/ReactDataTable";
 import Header from "./Components/Header";
 import ModalForm from "./Components/Modals";
+import api from './services/api'
 import "./App.css";
 
 class App extends React.Component {
@@ -10,10 +11,14 @@ class App extends React.Component {
     employees: []
   };
 
-  componentWillMount = () => {
-    fetch("http://localhost:3001/api/employees")
-      .then(response => response.json())
-      .then(employees => this.setState({ employees }));
+  componentWillMount = async () => {
+    try{
+      const response = await api.get('/api/employees');
+      this.setState({ employees: response.data });
+    } catch(e){
+      console.log('Cannot Fetch employees');
+      // TODO: Add Error Boundry components 
+    }
   };
 
   addEmployeeToState = employee => {

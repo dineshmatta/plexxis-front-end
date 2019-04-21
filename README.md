@@ -30,9 +30,9 @@ Github Repo: https://github.com/dineshmatta/plexxis-node-api
 1) Upgraded react version from 16.4 to latest 16.8
 2) Made App.js component as a parent component and rendering all child components by passing props
 3) child components includes:
-  i) Header Component
-  ii) ModalForm Component - which calls AddEditForm Component to render the add/edit form inside the Modal Component
-  iii) ReactDataTable component which is basically a records listing components which uses react-table to show employees data in a tabular format
+  * Header Component
+  * ModalForm Component - which calls AddEditForm Component to render the add/edit form inside the Modal Component
+  * ReactDataTable component which is basically a records listing components which uses react-table to show employees data in a tabular format
 4) ReactDataTable component dynamically creates columns from the data it received from database via props, it ignores id columns and dynamically add actions column(which includes icons for editing and deleting employee records).
 5) AddEditForm components maintains a seperate state for all the data changes made in the Add/Edit forms and when user submits the form it sends back all state data to parent component via props method invocation.
 6) When form is updated/Saved AddEditForm components makes api calls to backend api and saves the data, after that it triggers props callbacks to inform the parent components to update the state and close the ModalForm.

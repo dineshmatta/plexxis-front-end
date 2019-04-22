@@ -11,7 +11,7 @@ class App extends React.Component {
     employees: []
   };
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     try{
       const response = await api.get('/api/employees');
       this.setState({ employees: response.data });
